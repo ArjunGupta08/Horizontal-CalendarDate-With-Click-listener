@@ -1,4 +1,4 @@
-package com.arjun.horizontalcalendardate
+package com.arjungupta08.horizontal_calendar_date
 
 import android.os.Build
 import android.view.LayoutInflater
@@ -9,23 +9,22 @@ import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import java.util.*
 import kotlin.collections.ArrayList
 
 class CalendarAdapter(private val listener: (calendarDateModel: CalendarDateModel, position: Int) -> Unit):
     RecyclerView.Adapter<CalendarAdapter.CalendarViewHolder>(){
 
     private var list = ArrayList<CalendarDateModel>()
-    var adapterPosition = -1
+    private var adapterPosition = -1
 
 
-    interface onItemClickListener{
+    interface OnItemClickListener{
         fun onItemClick(text: String, date: String, day: String)
     }
 
-    private var mListener: onItemClickListener? = null
+    private var mListener: OnItemClickListener? = null
 
-    fun setOnItemClickListener(listener: onItemClickListener){
+    fun setOnItemClickListener(listener: OnItemClickListener){
         mListener = listener
     }
 
@@ -46,7 +45,7 @@ class CalendarAdapter(private val listener: (calendarDateModel: CalendarDateMode
             adapterPosition = position
             notifyItemRangeChanged(0, list.size)
 
-            val text = itemList.calendarYear.toString()
+            val text = itemList.calendarYear
             val date = itemList.calendarDate
             val day = itemList.calendarDay
             mListener?.onItemClick(text,date,day)
@@ -60,17 +59,16 @@ class CalendarAdapter(private val listener: (calendarDateModel: CalendarDateMode
             holder.calendarDate.setTextColor(ContextCompat.getColor(holder.itemView.context, R.color.black))
             holder.linear.setBackgroundResource(R.drawable.rectangle_outline)
         }
-
     }
     override fun getItemCount(): Int {
         return list.size
     }
 
     class CalendarViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-            val calendarDay = itemView.findViewById<TextView>(R.id.tv_calendar_day)
-            val calendarDate = itemView.findViewById<TextView>(R.id.tv_calendar_date)
-            val linear = itemView.findViewById<LinearLayout>(R.id.linear_calendar)
-}
+            val calendarDay : TextView= itemView.findViewById(R.id.tv_calendar_day)
+            val calendarDate : TextView= itemView.findViewById(R.id.tv_calendar_date)
+            val linear : LinearLayout= itemView.findViewById(R.id.linear_calendar)
+    }
 
     fun setData(calendarList: ArrayList<CalendarDateModel>) {
         list.clear()
