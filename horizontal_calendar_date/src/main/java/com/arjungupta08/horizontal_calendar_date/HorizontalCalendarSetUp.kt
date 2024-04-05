@@ -1,9 +1,6 @@
-package com.arjun.horizontalcalendardate
+package com.arjungupta08.horizontal_calendar_date
 
-import android.content.Context
-import android.widget.AdapterView.OnItemClickListener
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SnapHelper
@@ -12,19 +9,19 @@ import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 
-class CalendarSetUp() {
+class HorizontalCalendarSetUp() {
 
     private val sdf = SimpleDateFormat("MMMM yyyy", Locale.ENGLISH)
     private val cal = Calendar.getInstance(Locale.ENGLISH)
     private val currentDate = Calendar.getInstance(Locale.ENGLISH)
     private val dates = ArrayList<Date>()
-    private lateinit var adapter: CalendarAdapter
+    private lateinit var adapter: HorizontalCalendarAdapter
     private val calendarList2 = ArrayList<CalendarDateModel>()
 
     /*
      * Set up click listener
      */
-    fun setUpCalendarClickListener(ivCalendarNext: ImageView, ivCalendarPrevious: ImageView, listener: CalendarAdapter.onItemClickListener) {
+    fun setUpCalendarPrevNextClickListener(ivCalendarNext: ImageView, ivCalendarPrevious: ImageView, listener: HorizontalCalendarAdapter.OnItemClickListener) {
         ivCalendarNext.setOnClickListener {
             cal.add(Calendar.MONTH, 1)
             setUpCalendar(listener)
@@ -42,16 +39,17 @@ class CalendarSetUp() {
     /*
      * Setting up adapter for recyclerview
      */
-    fun setUpCalendarAdapter(recyclerView: RecyclerView, listener : CalendarAdapter.onItemClickListener) {
+    fun setUpCalendarAdapter(recyclerView: RecyclerView, listener : HorizontalCalendarAdapter.OnItemClickListener) {
         val snapHelper: SnapHelper = LinearSnapHelper()
         snapHelper.attachToRecyclerView(recyclerView)
-        adapter = CalendarAdapter { calendarDateModel: CalendarDateModel, position: Int ->
+
+        adapter = HorizontalCalendarAdapter() { calendarDateModel: CalendarDateModel, position: Int ->
             calendarList2.forEachIndexed { index, calendarModel ->
                 calendarModel.isSelected = index == position
             }
-            adapter.setData(calendarList2)
-            adapter.setOnItemClickListener(listener)
         }
+        adapter.setData(calendarList2)
+        adapter.setOnItemClickListener(listener)
         recyclerView.adapter = adapter
 
         setUpCalendar(listener)
@@ -60,9 +58,8 @@ class CalendarSetUp() {
     /*
      * Function to setup calendar for every month
      */
-    private fun setUpCalendar(listener: CalendarAdapter.onItemClickListener) {
+    private fun setUpCalendar(listener: HorizontalCalendarAdapter.OnItemClickListener) {
         val calendarList = ArrayList<CalendarDateModel>()
-//        tvDateMonth.text = sdf.format(cal.time)
         val monthCalendar = cal.clone() as Calendar
         val maxDaysInMonth = cal.getActualMaximum(Calendar.DAY_OF_MONTH)
         dates.clear()
@@ -76,6 +73,7 @@ class CalendarSetUp() {
         calendarList2.addAll(calendarList)
         adapter.setOnItemClickListener(listener)
         adapter.setData(calendarList)
+//        tvDateMonth.text = sdf.format(cal.time)
     }
 
 }
