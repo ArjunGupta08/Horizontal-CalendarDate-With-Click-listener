@@ -18,15 +18,27 @@ Add it in your root build.gradle at the end of repositories:
     		repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     		repositories {
     			mavenCentral()
-    			maven { url 'https://jitpack.io' }
+    			maven { url uri("https://jitpack.io") }
     		}
     	}
 
 > **Step 2.** Add the dependency
 
      dependencies {
-    	        implementation 'com.github.ArjunGupta08:Horizontal-CalendarDate-With-Click-listener:Tag'
+    	        implementation ("com.github.ArjunGupta08:Horizontal-CalendarDate-With-Click-listener:Tag")
     	}
 
 [![](https://jitpack.io/v/ArjunGupta08/Horizontal-CalendarDate-With-Click-listener.svg)](https://jitpack.io/#ArjunGupta08/Horizontal-CalendarDate-With-Click-listener)
+
+> **Step 3** recycler View SetUp
+
+        recyclerView = findViewById(R.id.recyclerView)
+        
+        ivCalendarNext = findViewById(R.id.iv_calendar_next)
+        ivCalendarPrevious = findViewById(R.id.iv_calendar_previous)
+
+        val calendarSetUp = HorizontalCalendarSetUp()
+        calendarSetUp.setUpCalendarAdapter(recyclerView, this@MainActivity)
+        calendarSetUp.setUpCalendarPrevNextClickListener(ivCalendarNext, ivCalendarPrevious, this@MainActivity)
+
 
