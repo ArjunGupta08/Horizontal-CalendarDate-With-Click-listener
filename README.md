@@ -28,17 +28,32 @@ Add it in your root build.gradle at the end of repositories:
     	        implementation ("com.github.ArjunGupta08:Horizontal-CalendarDate-With-Click-listener:Tag")
     	}
 
-[![](https://jitpack.io/v/ArjunGupta08/Horizontal-CalendarDate-With-Click-listener.svg)](https://jitpack.io/#ArjunGupta08/Horizontal-CalendarDate-With-Click-listener)
-
 > **Step 3** recycler View SetUp
 
         recyclerView = findViewById(R.id.recyclerView)
         
+        tvDateMonth = findViewById(R.id.text_date_month)
         ivCalendarNext = findViewById(R.id.iv_calendar_next)
         ivCalendarPrevious = findViewById(R.id.iv_calendar_previous)
 
         val calendarSetUp = HorizontalCalendarSetUp()
-        calendarSetUp.setUpCalendarAdapter(recyclerView, this@MainActivity)
-        calendarSetUp.setUpCalendarPrevNextClickListener(ivCalendarNext, ivCalendarPrevious, this@MainActivity)
+        
+        val tvMonth = calendarSetUp.setUpCalendarAdapter(recyclerView, this@MainActivity)
+        tvDateMonth.text = tvMonth
 
+        // SetUp your previous and next month keys
+        calendarSetUp.setUpCalendarPrevNextClickListener(ivCalendarNext, ivCalendarPrevious, this@MainActivity) {
+            tvDateMonth.text = it
+        }
+> **Step-4** Handle your previous and next month keys
 
+    // implement interface in your activity
+    class MainActivity : AppCompatActivity(), HorizontalCalendarAdapter.OnItemClickListener {
+
+    override fun onItemClick(ddMmYy: String, dd: String, day: String) {
+        findViewById<TextView>(R.id.selectedDate).text = "Selected date: $ddMmYy"
+        findViewById<TextView>(R.id.selectedDD).text = "Selected DD: $dd"
+        findViewById<TextView>(R.id.selectedDay).text = "Selected day: $day"
+    }
+
+[![](https://jitpack.io/v/ArjunGupta08/Horizontal-CalendarDate-With-Click-listener.svg)](https://jitpack.io/#ArjunGupta08/Horizontal-CalendarDate-With-Click-listener)
