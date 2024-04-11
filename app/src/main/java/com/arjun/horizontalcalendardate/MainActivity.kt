@@ -25,13 +25,17 @@ class MainActivity : AppCompatActivity(), HorizontalCalendarAdapter.OnItemClickL
         ivCalendarPrevious = findViewById(R.id.iv_calendar_previous)
 
         val calendarSetUp = HorizontalCalendarSetUp()
-        calendarSetUp.setUpCalendarAdapter(recyclerView, this@MainActivity)
-        calendarSetUp.setUpCalendarPrevNextClickListener(ivCalendarNext, ivCalendarPrevious, this@MainActivity)
+        val tvMonth = calendarSetUp.setUpCalendarAdapter(recyclerView, this@MainActivity)
+        tvDateMonth.text = tvMonth
+
+        calendarSetUp.setUpCalendarPrevNextClickListener(ivCalendarNext, ivCalendarPrevious, this@MainActivity) {
+            tvDateMonth.text = it
+        }
     }
 
-    override fun onItemClick(text: String, date: String, day: String) {
-        findViewById<TextView>(R.id.selectedDate).text = "Selected date: $text"
-        findViewById<TextView>(R.id.selectedDD).text = "Selected DD: $date"
+    override fun onItemClick(ddMmYy: String, dd: String, day: String) {
+        findViewById<TextView>(R.id.selectedDate).text = "Selected date: $ddMmYy"
+        findViewById<TextView>(R.id.selectedDD).text = "Selected DD: $dd"
         findViewById<TextView>(R.id.selectedDay).text = "Selected day: $day"
     }
 }
