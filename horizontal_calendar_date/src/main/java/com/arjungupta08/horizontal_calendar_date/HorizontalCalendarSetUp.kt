@@ -21,17 +21,21 @@ class HorizontalCalendarSetUp() {
     /*
      * Set up click listener
      */
-    fun setUpCalendarPrevNextClickListener(ivCalendarNext: ImageView, ivCalendarPrevious: ImageView, listener: HorizontalCalendarAdapter.OnItemClickListener) {
+    fun setUpCalendarPrevNextClickListener(ivCalendarNext: ImageView, ivCalendarPrevious: ImageView, listener: HorizontalCalendarAdapter.OnItemClickListener, month : (String) -> Unit ) {
         ivCalendarNext.setOnClickListener {
             cal.add(Calendar.MONTH, 1)
-            setUpCalendar(listener)
+            val monthDate = setUpCalendar(listener)
+            month.invoke(monthDate)
         }
         ivCalendarPrevious.setOnClickListener {
             cal.add(Calendar.MONTH, -1)
-            if (cal == currentDate)
-                setUpCalendar(listener)
-            else
-                setUpCalendar(listener)
+            if (cal == currentDate) {
+                val monthDate = setUpCalendar(listener)
+                month.invoke(monthDate)
+            } else {
+                val monthDate = setUpCalendar(listener)
+                month.invoke(monthDate)
+            }
         }
     }
 
@@ -39,7 +43,7 @@ class HorizontalCalendarSetUp() {
     /*
      * Setting up adapter for recyclerview
      */
-    fun setUpCalendarAdapter(recyclerView: RecyclerView, listener : HorizontalCalendarAdapter.OnItemClickListener) {
+    fun setUpCalendarAdapter(recyclerView: RecyclerView, listener : HorizontalCalendarAdapter.OnItemClickListener) : String {
         val snapHelper: SnapHelper = LinearSnapHelper()
         snapHelper.attachToRecyclerView(recyclerView)
 
@@ -52,13 +56,13 @@ class HorizontalCalendarSetUp() {
         adapter.setOnItemClickListener(listener)
         recyclerView.adapter = adapter
 
-        setUpCalendar(listener)
+        return setUpCalendar(listener)
     }
 
     /*
      * Function to setup calendar for every month
      */
-    private fun setUpCalendar(listener: HorizontalCalendarAdapter.OnItemClickListener) {
+    private fun setUpCalendar(listener: HorizontalCalendarAdapter.OnItemClickListener) : String {
         val calendarList = ArrayList<CalendarDateModel>()
         val monthCalendar = cal.clone() as Calendar
         val maxDaysInMonth = cal.getActualMaximum(Calendar.DAY_OF_MONTH)
@@ -73,7 +77,7 @@ class HorizontalCalendarSetUp() {
         calendarList2.addAll(calendarList)
         adapter.setOnItemClickListener(listener)
         adapter.setData(calendarList)
-//        tvDateMonth.text = sdf.format(cal.time)
+        return sdf.format(cal.time)
     }
 
 }

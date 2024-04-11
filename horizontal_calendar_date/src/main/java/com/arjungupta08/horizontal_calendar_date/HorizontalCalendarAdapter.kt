@@ -19,7 +19,7 @@ class HorizontalCalendarAdapter(private val listener: (calendarDateModel: Calend
 
 
     interface OnItemClickListener{
-        fun onItemClick(text: String, date: String, day: String)
+        fun onItemClick(ddMmYy: String, dd: String, day: String)
     }
 
     private var mListener: OnItemClickListener? = null
