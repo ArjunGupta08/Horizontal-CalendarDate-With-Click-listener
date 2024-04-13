@@ -3,8 +3,9 @@
 [![](https://jitpack.io/v/ArjunGupta08/Horizontal-CalendarDate-With-Click-listener.svg)](https://jitpack.io/#ArjunGupta08/Horizontal-CalendarDate-With-Click-listener)
 
 ## [See Demo](https://youtube.com/shorts/YQ8cCuMc9JY?feature=share)
-
-- it shows an horizontal row of dates and days of an perticular month
+- it shows an horizontal row of dates and days of an perticular month.
+- You can switch betweeen months easily.
+<img src="https://github.com/ArjunGupta08/Horizontal-CalendarDate-With-Click-listener/assets/85922120/38ad50e2-0297-4d44-977a-e65c7a12dc2f" width="250" />
 
 # How To
 
@@ -17,6 +18,7 @@ Add it in your root build.gradle at the end of repositories:
      dependencyResolutionManagement {
     		repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     		repositories {
+               google()
     			mavenCentral()
     			maven { url uri("https://jitpack.io") }
     		}
@@ -25,16 +27,17 @@ Add it in your root build.gradle at the end of repositories:
 > **Step 2.** Add the dependency
 
      dependencies {
-    	        implementation ("com.github.ArjunGupta08:Horizontal-CalendarDate-With-Click-listener:Tag")
+    	        implementation ("com.github.ArjunGupta08:Horizontal-CalendarDate-With-Click-listener:1.1.0")
     	}
 
 > **Step 3** recycler View SetUp
 
-        recyclerView = findViewById(R.id.recyclerView)
-        
         tvDateMonth = findViewById(R.id.text_date_month)
         ivCalendarNext = findViewById(R.id.iv_calendar_next)
         ivCalendarPrevious = findViewById(R.id.iv_calendar_previous)
+
+        recyclerView = findViewById(R.id.recyclerView)     
+        recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
         val calendarSetUp = HorizontalCalendarSetUp()
         
