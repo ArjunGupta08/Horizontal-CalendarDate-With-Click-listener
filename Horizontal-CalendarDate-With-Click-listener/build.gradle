@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
+    id 'maven-publish'
 }
 
 android {
@@ -39,3 +40,19 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 }
+
+// Maven Locale Publishing artifact
+project.afterEvaluate {
+    publishing {
+        publications {
+            libraryProject(MavenPublication) {
+                setGroupId 'com.arjungupta08'
+                setArtifactId 'horizontal-calendar-with-click-listener'
+                version '1.0.0'
+                artifact bundleReleaseAar
+            }
+        }
+    }
+}
+
+// Now open your terminal of android studio and run-> ./gradlew publishToMavenLocal

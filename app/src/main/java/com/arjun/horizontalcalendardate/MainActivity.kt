@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.arjungupta08.horizontal_calendar_date.HorizontalCalendarAdapter
 import com.arjungupta08.horizontal_calendar_date.HorizontalCalendarSetUp
@@ -20,9 +21,11 @@ class MainActivity : AppCompatActivity(), HorizontalCalendarAdapter.OnItemClickL
         setContentView(R.layout.activity_main)
 
         tvDateMonth = findViewById(R.id.text_date_month)
-        recyclerView = findViewById(R.id.recyclerView)
         ivCalendarNext = findViewById(R.id.iv_calendar_next)
         ivCalendarPrevious = findViewById(R.id.iv_calendar_previous)
+
+        recyclerView = findViewById(R.id.recyclerView)
+        recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
         val calendarSetUp = HorizontalCalendarSetUp()
         val tvMonth = calendarSetUp.setUpCalendarAdapter(recyclerView, this@MainActivity)
