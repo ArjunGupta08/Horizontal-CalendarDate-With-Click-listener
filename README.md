@@ -1,3 +1,5 @@
+<img align="right" src="https://github.com/ArjunGupta08/Horizontal-CalendarDate-With-Click-listener/assets/85922120/38ad50e2-0297-4d44-977a-e65c7a12dc2f" width="220" />
+
 # Horizontal CalendarDate With Click listener
 
 [![](https://jitpack.io/v/ArjunGupta08/Horizontal-CalendarDate-With-Click-listener.svg)](https://jitpack.io/#ArjunGupta08/Horizontal-CalendarDate-With-Click-listener)
@@ -5,7 +7,6 @@
 ## [See Demo](https://youtube.com/shorts/YQ8cCuMc9JY?feature=share)
 - it shows an horizontal row of dates and days of an perticular month.
 - You can switch betweeen months easily.
-<img align="right" src="https://github.com/ArjunGupta08/Horizontal-CalendarDate-With-Click-listener/assets/85922120/38ad50e2-0297-4d44-977a-e65c7a12dc2f" width="250" />
 
 # How To
 
